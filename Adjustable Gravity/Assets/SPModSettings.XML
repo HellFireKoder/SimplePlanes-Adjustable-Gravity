@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SPModSettings</name>
+    </assembly>
+    <members>
+        <member name="T:SPModSettings.IModSetting">
+            <summary>
+            interface for setting scripts, to handle data storage and validation
+            </summary>
+        </member>
+        <member name="P:SPModSettings.IModSetting.Owner">
+            <summary>
+            ID of the page this setting is on
+            </summary>
+        </member>
+        <member name="P:SPModSettings.IModSetting.SettingID">
+            <summary>
+            Page-unique ID of this setting
+            </summary>
+        </member>
+        <member name="P:SPModSettings.IModSetting.Title">
+            <summary>
+            Text displayed to the left of the setting input
+            </summary>
+        </member>
+        <member name="P:SPModSettings.IModSetting.DefaultValue">
+            <summary>
+            The value this setting was intially created with
+            </summary>
+        </member>
+        <member name="P:SPModSettings.IModSetting.Value">
+            <summary>
+            Current value of this setting
+            </summary>
+        </member>
+        <member name="M:SPModSettings.IModSetting.Init(System.Object[])">
+            <summary>
+            Initializes the setting, should be called automatically when setting is generated
+            </summary>
+            <param name="InitOptions"></param>
+        </member>
+        <member name="T:SPModSettings.IModSettingsHandler">
+            <summary>
+            Interface for a type which handles generation of settings pages and settings
+            </summary>
+        </member>
+        <member name="M:SPModSettings.IModSettingsHandler.AddSettingsPage(System.String,System.String,System.String)">
+            <summary>
+            Adds a new settings page
+            </summary>
+            <param name="ID">ID of the page, must be unique</param>
+            <param name="Title"></param>
+            <param name="Description"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPModSettings.IModSettingsHandler.AddSettingToPage(SPModSettings.IModSettingsPage,System.String,System.String,SPModSettings.ModSettingTypes,System.String,System.Type,System.Object[])">
+            <summary>
+            Adds a setting to a settings page
+            </summary>
+            <param name="Page">The page</param>
+            <param name="SettingID">Setting ID, must be unique on the page (no other settings with the same ID, on this page)</param>
+            <param name="Title">Text displayed to the left of the setting input</param>
+            <param name="InputType">Type of setting input</param>
+            <param name="DefaultValue">Starting value of the setting (before saving/loading)</param>
+            <param name="CustomModSettingType">Custom MonoBehaviour which implements IModSetting to be applied to the setting input. Leave null for default IModSetting for given InputType</param>
+            <param name="InitOptions">Extra parameters for initializing, usually ignored (except by dropdown and slider types)</param>
+            <returns>The setting added (IModSetting)</returns>
+        </member>
+        <member name="M:SPModSettings.IModSettingsHandler.LoadSettingsForPage(SPModSettings.IModSettingsPage)">
+            <summary>
+            Loads the page's settings
+            </summary>
+            <param name="Page"></param>
+        </member>
+        <member name="T:SPModSettings.IModSettingsPage">
+            <summary>
+            Interface for SettingsPage (handles the page's settings)
+            </summary>
+        </member>
+        <member name="P:SPModSettings.IModSettingsPage.PageID">
+            <summary>
+            The ID for this page, must be unique
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:SPModSettings.IModSettingsPage.Settings" -->
+        <member name="M:SPModSettings.IModSettingsPage.AddSetting(System.String,System.String,SPModSettings.ModSettingTypes,System.String,System.Type,System.Object[])">
+            <summary>
+            Adds a setting to this page
+            </summary>
+            <param name="SettingID">Setting ID, must be unique on this page</param>
+            <param name="Title">Text displayed to the left of the setting input</param>
+            <param name="InputType">Type of setting input</param>
+            <param name="DefaultValue">Starting value of the setting (before editing/loading)</param>
+            <param name="CustomType">Custom MonoBehaviour which implements IModSetting to be applied to the setting input. Leave null for default IModSetting for given InputType</param>
+            /// <param name="InitOptions">Extra parameters for initializing, usually ignored (except by dropdown and slider types)</param>
+            <returns>The setting added (IModSetting)</returns>
+        </member>
+        <member name="M:SPModSettings.IModSettingsPage.GenerateSettingsXML">
+            <summary>
+            Generates the XML for this settings page and settings
+            </summary>
+            <returns>Generated XML</returns>
+        </member>
+        <member name="M:SPModSettings.IModSettingsPage.SaveSettings">
+            <summary>
+            Saves the settings pages settings
+            </summary>
+        </member>
+        <member name="M:SPModSettings.IModSettingsPage.LoadSettings">
+            <summary>
+            Loads the saved settings for this page, if it exists
+            </summary>
+        </member>
+        <member name="T:SPModSettings.ModSettingConverter">
+            <summary>
+            Helper class for setting conversions
+            </summary>
+        </member>
+        <member name="M:SPModSettings.ModSettingConverter.StringToVector3(System.String)">
+            <summary>
+            Converts a string to a Vector3 if possible
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPModSettings.ModSettingConverter.Vector3TryParse(System.String,UnityEngine.Vector3@)">
+            <summary>
+            Attempts to parse a string to a Vector3, returns true if successful, returns false if not
+            </summary>
+            <param name="s"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPModSettings.ModSettingConverter.Vector3ToString(UnityEngine.Vector3)">
+            <summary>
+            Converts a Vector3 to a string in format "x,y,z"
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SPModSettings.ModSettingExtensions">
+            <summary>
+            Extension methods relevant to Mod Settings
+            </summary>
+        </member>
+        <member name="M:SPModSettings.ModSettingExtensions.ToStringCompact(UnityEngine.Vector3)">
+            <summary>
+            Converts the Vector3 to a string in format "x,y,z" instead of the normal ToString() which gives "(x, y, z)"
+            </summary>
+            <param name="vector"></param>
+            <returns>string with format "x,y,z"</returns>
+        </member>
+        <member name="T:SPModSettings.ModSettingsHandler">
+            <summary>
+            Handles settings things
+            </summary>
+        </member>
+        <member name="P:SPModSettings.ModSettingsHandler.ModSettingsReady">
+            <summary>
+            Whether the handler is ready to generate settings
+            </summary>
+        </member>
+        <member name="M:SPModSettings.ModSettingsHandler.AddSettingsPage(System.String,System.String,System.String)">
+            <summary>
+            Adds a settings page to the Mod Settings menu
+            </summary>
+            <param name="ID">Page ID, must be unique (no other pages with the same ID)</param>
+            <param name="Title">Displayed at the top of the page</param>
+            <param name="Description"></param>
+            <returns>The newly created settings page</returns>
+        </member>
+        <member name="M:SPModSettings.ModSettingsHandler.AddSettingToPage(SPModSettings.IModSettingsPage,System.String,System.String,SPModSettings.ModSettingTypes,System.String,System.Type,System.Object[])">
+            <summary>
+            Adds a setting to a settings page
+            </summary>
+            <param name="Page">The page</param>
+            <param name="SettingID">Setting ID, must be unique on the page (no other settings with the same ID, on this page)</param>
+            <param name="Title">Text displayed to the left of the setting input</param>
+            <param name="InputType">Type of setting input</param>
+            <param name="DefaultValue">Starting value of the setting (before saving/loading)</param>
+            <param name="CustomModSettingType">Custom MonoBehaviour which implements IModSetting to be applied to the setting input. Leave null for default IModSetting for given InputType</param>
+            <param name="InitOptions">Extra parameters for initializing, usually ignored (except by dropdown and slider types)</param>
+            <returns>The setting added (IModSetting)</returns>
+        </member>
+        <member name="M:SPModSettings.ModSettingsHandler.AddSettingToPage(SPModSettings.IModSettingsPage,System.String,System.String,SPModSettings.ModSettingTypes,System.String,System.Object[])">
+            <summary>
+            Adds a setting to a settings page
+            </summary>
+            <param name="Page">The page</param>
+            <param name="SettingID">Setting ID, must be unique on the page (no other settings with the same ID, on this page)</param>
+            <param name="Title">Text displayed to the left of the setting input</param>
+            <param name="InputType">Type of setting input</param>
+            <param name="DefaultValue">Starting value of the setting (before saving/loading)</param>
+            <param name="InitOptions">Extra parameters for initializing, usually ignored (except by dropdown and slider types)</param>
+            <returns>The setting added (IModSetting)</returns>
+        </member>
+        <member name="M:SPModSettings.ModSettingsHandler.LoadSettingsForPage(SPModSettings.IModSettingsPage)">
+            <summary>
+            Loads the settings on the page if it has been saved before, should be called after you're done adding setttings
+            </summary>
+            <param name="Page"></param>
+        </member>
+        <member name="T:SPModSettings.ModSettingTypes">
+            <summary>
+            Standard ModSettingTypes
+            </summary>
+        </member>
+        <member name="F:SPModSettings.ModSettingTypes.Numeric">
+            <summary>
+            params: [bool] WholeNumbersOnly (default: false)
+            </summary>
+        </member>
+        <member name="F:SPModSettings.ModSettingTypes.Text">
+            <summary>
+            params: none
+            </summary>
+        </member>
+        <member name="F:SPModSettings.ModSettingTypes.Toggle">
+            <summary>
+            Boolean value toggle control
+            params: none
+            </summary>
+        </member>
+        <member name="F:SPModSettings.ModSettingTypes.Vector3">
+            <summary>
+            params: none
+            </summary>
+        </member>
+        <member name="F:SPModSettings.ModSettingTypes.Slider">
+            <summary>
+            params: [float] MinValue, [float] MaxValue
+            </summary>
+        </member>
+        <member name="F:SPModSettings.ModSettingTypes.Dropdown">
+            <summary>
+            params: stringOptions (unlimited)
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModManifest buildID="05b7c86d-00ed-4744-94d8-7d645bd5be3a">
+  <Mod name="Adjustable Gravity" author="HellFireKoder" versionMajor="1" versionMinor="0" lastUpdated="4/25/2017 1:24:29 AM" apiVersion="1.0.0.0" description="Lets you set the gravity using a mod settings page.&#xA;Requires Mod Settings mod to function.">
+    <Steam title="" visibility="Public" previewPath="" language="English" tags="">
+      <description></description>
+    </Steam>
+    <GameObjects>
+      <GameObject name="Adjustable Gravity Manager" path="Assets/_ModAssets_/Adjustable Gravity Manager.prefab" />
+    </GameObjects>
+    <Assets />
+    <Assemblies>
+      <Assembly name="SPModSettings.dll" path="Assets/_ModAssets_/SPModSettings.dll.bytes" isProjectAssembly="false" />
+      <Assembly name="AdjustableGravity-Assembly-CSharp.dll" path="Assets/_ModAssets_/AdjustableGravity-Assembly-CSharp.dll.bytes" isProjectAssembly="true" />
+    </Assemblies>
+    <Sections>
+      <SimplePlanesMod apiVersion="1.0.0.0">
+        <Maps />
+        <Levels />
+        <Parts />
+        <DesignerPlugins />
+        <MapPlugins />
+        <PersistentObjects>
+          <PersistentObject objectName="Adjustable Gravity Manager" />
+        </PersistentObjects>
+      </SimplePlanesMod>
+    </Sections>
+  </Mod>
+</ModManifest>
