@@ -28,3 +28,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/Adjustable Gravity/Library
+/Adjustable Gravity/.mdb
+/Adjustable Gravity/ModAssetBundles
