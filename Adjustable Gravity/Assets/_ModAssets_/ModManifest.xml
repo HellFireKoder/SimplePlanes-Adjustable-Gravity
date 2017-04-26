@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ModManifest buildID="05b7c86d-00ed-4744-94d8-7d645bd5be3a">
-  <Mod name="Adjustable Gravity" author="HellFireKoder" versionMajor="1" versionMinor="0" lastUpdated="4/25/2017 1:24:29 AM" apiVersion="1.0.0.0" description="Lets you set the gravity using a mod settings page.&#xA;Requires Mod Settings mod to function.">
-    <Steam title="" visibility="Public" previewPath="" language="English" tags="">
-      <description></description>
+<ModManifest buildID="1a14a06d-854e-4357-8ec3-548b3fb457f7">
+  <Mod name="Adjustable Gravity" author="HellFireKoder" versionMajor="1" versionMinor="0" lastUpdated="4/26/2017 4:25:57 PM" apiVersion="1.0.0.0" description="Lets you set the gravity using a mod settings page.&#xA;Requires Mod Settings mod to function.">
+    <Steam title="Adjustable Gravity" visibility="Public" previewPath="Assets/Images/AdjustableGravityThumbnail.png" language="English" tags="">
+      <description>Uses the [url=https://www.simpleplanes.com/Mods/View/607194]Mod Settings mod[/url] to let you set the gravity.</description>
     </Steam>
     <GameObjects>
       <GameObject name="Adjustable Gravity Manager" path="Assets/_ModAssets_/Adjustable Gravity Manager.prefab" />
